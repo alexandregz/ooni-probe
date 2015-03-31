@@ -9,8 +9,8 @@ class LanternBootstrapProcessDirector(ProcessDirector):
     before timing out.
     """
     def __init__(self, d, finished=None, timeout=None, stdin=None):
-        super(LanternBootstrapProcessDirector, self).__init__(self, d,
-                                                     finished, timeout, stdin)
+        super(LanternBootstrapProcessDirector, self).__init__(d, finished,
+                                                              timeout, stdin)
         self.bootstrapped = defer.Deferred()
 
     def outReceived(self, data):
