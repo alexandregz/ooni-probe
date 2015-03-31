@@ -36,13 +36,13 @@ class LanternTest(ProcessTest):
     test_lantern_bootstrap
       Starts Lantern on Linux in --headless mode and
       determine if it bootstraps successfully or not.
-
-    test_lantern_pass_through
-      Starts Lantern and make a HTTP request for a domain that is not in Lanterns white list.
-      #XXX is this worth implementing?
+      The report key 'bootstrapped' is either True or False.
 
     test_lantern_circumvent
       Starts Lantern and make a HTTP request for a domain that is in Lanterns white list.
+
+    XXX: verify that the process exits properly and the stderr and stdout are written properly
+    XXX: fix the path issue
     """
 
     name = "Lantern Circumvention Tool Test"
@@ -56,7 +56,7 @@ class LanternTest(ProcessTest):
         self.processDirector = LanternBootstrapProcessDirector(d, finished, self.timeout)
         reactor.spawnProcess(self.processDirector, command[0], command)
 
-    def test_lantern_bootstrapped(self):
+    def test_lantern_bootstrap(self):
         def addResultToReport(result):
             self.report['bootstrapped'] = True
 
@@ -65,3 +65,7 @@ class LanternTest(ProcessTest):
 
         self.processDirector.bootstrapped.addCallback(addResultToReport)
         self.processDirector.bootstrapped.addErrback(addFailureToReport)
+
+    def test_lantern_circumvent(self):
+        """ TODO: implement http_proxy agent fetch """
+        pass
