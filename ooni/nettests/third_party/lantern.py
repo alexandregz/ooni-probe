@@ -53,7 +53,7 @@ class LanternTest(ProcessTest):
     def setUp(self):
         d = defer.Deferred()
         command = ["/home/flashlight/go/bin/lantern_linux", "--headless"]
-        self.processDirector = LanternBootstrapProcessDirector(d, finished, self.timeout)
+        self.processDirector = LanternBootstrapProcessDirector(d, None, self.timeout)
         reactor.spawnProcess(self.processDirector, command[0], command)
 
     def test_lantern_bootstrap(self):
